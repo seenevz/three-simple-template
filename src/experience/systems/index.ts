@@ -1,18 +1,16 @@
 import type { Camera, Scene, WebGLRenderer } from "three";
 import { framerateLimit } from "../../config";
 import type { TickCallback } from "../../types";
-import { setupClock, stats, waitMs } from "../../utils";
+import { stats } from "../../utils";
 
 export * from "./camera";
 export * from "./renderer";
 export * from "./resizer";
 export * from "./controls";
 
-const { delta, updateClockDelta } = setupClock();
-
 let then = 0;
-// let delta = 0;
-const interval = 1 / framerateLimit;
+let delta = 0;
+const interval = 1000 / framerateLimit;
 
 export const update = (
   renderer: WebGLRenderer,
@@ -22,15 +20,13 @@ export const update = (
   time = 0
 ) => {
   requestAnimationFrame(time => update(renderer, scene, camera, triggerUpdatables, time));
-  updateClockDelta();
+  delta = time - then;
 
-  then += delta();
-
-  if (then > interval) {
-    triggerUpdatables(then);
+  if (delta > interval) {
+    triggerUpdatables(delta / 1000);
     renderer.render(scene, camera);
 
-    then = delta() % interval;
+    then = time - (delta % interval);
 
     stats.update();
   }
