@@ -1,12 +1,12 @@
 {
-  "name": "three-fonts",
+  "name": "three-simple-template",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --host"
   },
   "devDependencies": {
     "@types/three": "^0.144.0",
