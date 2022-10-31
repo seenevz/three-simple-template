@@ -8,8 +8,6 @@ export * from "./renderer";
 export * from "./resizer";
 export * from "./controls";
 
-let then = 0;
-let delta = 0;
 const interval = 1000 / framerateLimit;
 
 export const update = (
@@ -17,19 +15,19 @@ export const update = (
   scene: Scene,
   camera: Camera,
   triggerUpdatables: CallableFunction,
-  time = 0
+  time = 0,
+  previous = 0
 ) => {
-  requestAnimationFrame(time => update(renderer, scene, camera, triggerUpdatables, time));
-  delta = time - then;
-
-  if (delta > interval) {
-    triggerUpdatables(delta / 1000);
+  if (time - previous > interval) {
+    triggerUpdatables((time - previous) / 1000);
     renderer.render(scene, camera);
 
-    then = time - (delta % interval);
+    previous = time - ((time - previous) % interval);
 
     stats.update();
   }
+
+  requestAnimationFrame(time => update(renderer, scene, camera, triggerUpdatables, time, previous));
 };
 
 export const setupUpdatables = () => {
