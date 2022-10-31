@@ -13,6 +13,7 @@ export function createControls(
 
   controls.enableDamping = true;
   controls.maxDistance = 100;
+  controls.minDistance = 2;
   controls.maxPolarAngle = Math.PI / 2;
 
   controls.target.y = 3;

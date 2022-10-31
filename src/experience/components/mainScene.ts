@@ -5,7 +5,7 @@ export const createMainScene = () => {
 
   scene.background = new Color().setHSL(0.6, 0, 1);
 
-  scene.fog = new Fog(0xffffff, 0.1, 450);
+  scene.fog = new Fog(0xffffff, 0.1, 500);
 
   return scene;
 };

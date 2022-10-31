@@ -5,6 +5,8 @@ function createLights() {
   ambLight.color.setHSL(0.6, 1, 0.6);
   ambLight.groundColor.setHSL(0.095, 1, 0.75);
 
+  ambLight.position.set(0, 50, 0);
+
   const light2 = new DirectionalLight("white", 5);
 
   light2.castShadow = true;
