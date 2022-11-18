@@ -3,5 +3,5 @@
 To use template create a folder and run inside:
 
 ```
-npx degit seenevz/three-simple-template
+npx degit seenevz/three-simple-template name-of-project
 ```
